@@ -1,9 +1,20 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+
+// Styles
+import './static/scss/app.scss';
+
+// Store
+import { Provider } from 'react-redux';
+import { configureStore } from './core/store';
+
+const mountNode = document.getElementById('root');
+const store = configureStore();
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+  <Provider store={store}>
+    <h1>Hello World!</h1>
+  </Provider>,
+  mountNode
 );

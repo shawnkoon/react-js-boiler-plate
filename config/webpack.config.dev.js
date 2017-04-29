@@ -9,6 +9,7 @@ var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeMod
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 
+var path = require('path');
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -70,6 +71,7 @@ module.exports = {
     // if there any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
     fallback: paths.nodePaths,
+    root: path.resolve('src'),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
@@ -89,7 +91,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'eslint',
-        include: paths.appSrc,
+        include: path.resolve('src'),
       }
     ],
     loaders: [
@@ -124,14 +126,15 @@ module.exports = {
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: paths.appSrc,
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
           
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
-          cacheDirectory: true
+          cacheDirectory: true,
+          presets:['react']
         }
       },
       // "postcss" loader applies autoprefixer to our CSS.
