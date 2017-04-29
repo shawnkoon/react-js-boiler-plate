@@ -9,12 +9,14 @@ import './static/scss/app.scss';
 import { Provider } from 'react-redux';
 import { configureStore } from './core/store';
 
+import { App } from './views';
+
 const mountNode = document.getElementById('root');
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <h1>Hello World!</h1>
+    <App />
   </Provider>,
   mountNode
 );
